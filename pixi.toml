@@ -1,0 +1,41 @@
+[workspace]
+authors = ["kunl60 <127754709+kunl60@users.noreply.github.com>"]
+channels = ["conda-forge"]
+name = "Bayesian_using_TM"
+platforms = ["osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+
+[activation.env]
+KMP_DUPLICATE_LIB_OK = "TRUE"
+
+[dependencies]
+python = ">=3.13.14,<3.14"
+numpy = ">=2.5.1,<3"
+pandas = ">=3.0.5,<4"
+pgmpy = ">=1.1.2,<2"
+networkx = ">=3.6.1,<4"
+scikit-learn = ">=1.9.0,<2"
+clang = ">=22.1.8,<23"
+llvm-openmp = ">=22.1.8,<23"
+
+[pypi-dependencies]
+ytm = { git = "https://gitlab.com/Mayur1009/YTM", branch = "dev", extras = ["examples"] }
+tmu = { path = "/Users/kunaldumbre/Desktop/Bayesian_using_TM/dev/tmu", editable = true }
+causal-learn = ">=0.1.4,<0.2"
+dagma = ">=1.1.1,<2"
+gcastle = ">=1.0.4,<2"
+pulp = ">=3.3.2,<4"
+xges = ">=0.1.6,<0.2"
+
+# xges 0.1.6 (its latest PyPI release) pins numpy<2.0.0 in its own
+# metadata, conflicting with this repo's numpy>=2.5.1. That pin is stale
+# packaging, not an actual incompatibility - xges's pure-Python code
+# (plain np.zeros/np.dot/np.linalg.solve/np.log) runs fine under numpy
+# 2.5.1 (verified: examples/simple.py's v-structure case recovers the
+# correct edges). Override just this one bound so uv's resolver accepts
+# the numpy version conda already solved for, instead of failing the lock.
+[pypi-options.dependency-overrides]
+numpy = ">=1.26.4"
+numba = ">=0.59.1"
