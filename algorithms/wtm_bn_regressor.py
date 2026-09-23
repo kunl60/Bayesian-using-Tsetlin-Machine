@@ -71,7 +71,7 @@ class TsetlinMBElbowContinuousRegressor:
 
             # Compute scores
             scored_inputs = [
-                (input_element, values["frequency"] * values["total_weightage"])
+                (input_element, values["frequency"])
                 for input_element, values in input_data.items()
             ]
 
@@ -413,4 +413,12 @@ class TsetlinMBElbowContinuousRegressor:
             "colliders": colliders,
             "spouses": dict(spouses),
             "separating_sets": separating_sets,
+            # Per-target elbow-selected candidates (deduplicated variable
+            # names, i.e. not raw pos/neg TM literals) before CI-test
+            # pruning in compute_target_PC - len(...) per target is the
+            # elbow-selected count for that target.
+            "elbow_selected": {
+                target: [var for var, _ in candidates]
+                for target, candidates in target_candidates.items()
+            },
         }

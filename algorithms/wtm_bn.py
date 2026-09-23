@@ -36,7 +36,7 @@ class TsetlinMB_elbow:
     @staticmethod
     def find_elbow_index(scores):
 
-        if len(scores) <= 2:
+        if len(scores) <= 5:
             return len(scores)
 
         # Compute differences between consecutive scores
@@ -119,7 +119,7 @@ class TsetlinMB_elbow:
 
             # Compute scores
             scored_inputs = [
-                (input_element, values["frequency"] * values["total_weightage"])
+                (input_element, values["frequency"])
                 for input_element, values in input_data.items()
             ]
 

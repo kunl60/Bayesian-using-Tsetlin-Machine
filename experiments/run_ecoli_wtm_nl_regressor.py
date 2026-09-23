@@ -24,7 +24,7 @@ def main():
         # which is just a voting threshold) - needs to be much larger than the
         # classifier's T=10, along with more clauses/epochs, or the regressor
         # is starved of resolution. These values were validated in ad-hoc testing.
-        tm_mb_reg = TsetlinMBContinuousRegressor(num_epochs=1, number_clauses=10, top_n=10, T=10, s=1)
+        tm_mb_reg = TsetlinMBContinuousRegressor(num_epochs=5, number_clauses=100, top_n=5, T=100, s=1)
         results = tm_mb_reg.run(categorical_samples, raw_samples)
 
         shd, fp, fn = structural_hamming_distance(ground_truth, results["model"])
@@ -43,16 +43,16 @@ def main():
         print(f"SHD: {shd}")
         print(f"False Positives: {fp}")
         print(f"False Negatives: {fn}")
-        print(f"Precision: {precision:.4f}")
-        print(f"Recall: {recall:.4f}")
-        print(f"F1 Score: {f1:.4f}")
-        print(f"Directed Precision: {d_precision:.4f}")
-        print(f"Directed Recall: {d_recall:.4f}")
-        print(f"Directed F1 Score: {d_f1:.4f}")
+        print(f"Precision: {precision * 100:.2f}%")
+        print(f"Recall: {recall * 100:.2f}%")
+        print(f"F1 Score: {f1 * 100:.2f}%")
+        print(f"Directed Precision: {d_precision * 100:.2f}%")
+        print(f"Directed Recall: {d_recall * 100:.2f}%")
+        print(f"Directed F1 Score: {d_f1 * 100:.2f}%")
         print(f"Correctly Oriented Edges: {correct}")
         print(f"Incorrectly Oriented Edges: {incorrect}")
         print(f"Left Undirected: {undirected}")
-        print(f"Orientation Accuracy (resolved only): {orient_acc:.4f}")
+        print(f"Orientation Accuracy (resolved only): {orient_acc * 100:.2f}%")
 
         shd_list.append(shd)
         precision_list.append(precision)
@@ -73,15 +73,15 @@ def main():
     print(f"Runtime (s): {np.mean(runtime_list):.2f} ± {np.std(runtime_list):.2f}")
     print(f"Nodes Difference: {np.mean(nodes_diff_list):.2f} ± {np.std(nodes_diff_list):.2f}")
     print(f"SHD: {np.mean(shd_list):.2f} ± {np.std(shd_list):.2f}")
-    print(f"Precision: {np.mean(precision_list):.4f} ± {np.std(precision_list):.4f}")
-    print(f"Recall: {np.mean(recall_list):.4f} ± {np.std(recall_list):.4f}")
-    print(f"F1 Score: {np.mean(f1_list):.4f} ± {np.std(f1_list):.4f}")
+    print(f"Precision: {np.mean(precision_list) * 100:.2f}% ± {np.std(precision_list) * 100:.2f}%")
+    print(f"Recall: {np.mean(recall_list) * 100:.2f}% ± {np.std(recall_list) * 100:.2f}%")
+    print(f"F1 Score: {np.mean(f1_list) * 100:.2f}% ± {np.std(f1_list) * 100:.2f}%")
 
     print("\n--- Direction (CPDAG) - Summary (mean ± std across runs) ---")
-    print(f"Directed Precision: {np.mean(d_precision_list):.4f} ± {np.std(d_precision_list):.4f}")
-    print(f"Directed Recall: {np.mean(d_recall_list):.4f} ± {np.std(d_recall_list):.4f}")
-    print(f"Directed F1 Score: {np.mean(d_f1_list):.4f} ± {np.std(d_f1_list):.4f}")
-    print(f"Orientation Accuracy (resolved only): {np.mean(orient_acc_list):.4f} ± {np.std(orient_acc_list):.4f}")
+    print(f"Directed Precision: {np.mean(d_precision_list) * 100:.2f}% ± {np.std(d_precision_list) * 100:.2f}%")
+    print(f"Directed Recall: {np.mean(d_recall_list) * 100:.2f}% ± {np.std(d_recall_list) * 100:.2f}%")
+    print(f"Directed F1 Score: {np.mean(d_f1_list) * 100:.2f}% ± {np.std(d_f1_list) * 100:.2f}%")
+    print(f"Orientation Accuracy (resolved only): {np.mean(orient_acc_list) * 100:.2f}% ± {np.std(orient_acc_list) * 100:.2f}%")
 
 
 if __name__ == "__main__":

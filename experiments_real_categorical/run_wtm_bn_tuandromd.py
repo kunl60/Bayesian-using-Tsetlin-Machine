@@ -26,6 +26,16 @@ K = discovery_results["model"]
 
 MB_results = {node: list(K.neighbors(node)) for node in K.nodes()}
 
+# Elbow-selected variables per target (deduplicated variable names, i.e.
+# not raw pos/neg TM literals) - counted before CI-test pruning. Discovery
+# runs once (unlike the classifier eval below), so this is a single set
+# of stats, not mean ± std across runs.
+elbow_counts = {target: len(vars_) for target, vars_ in discovery_results["elbow_selected"].items()}
+elbow_values = list(elbow_counts.values())
+elbow_mean = np.mean(elbow_values)
+elbow_median = np.median(elbow_values)
+elbow_max = np.max(elbow_values)
+
 # 3. Evaluate over multiple runs, each with a different but fixed split seed
 # so the 5 splits differ from each other but the whole script is reproducible
 run_seeds = [1, 2, 3, 4, 5]
@@ -93,6 +103,10 @@ for run, seed in enumerate(run_seeds, start=1):
 print("\n--- Summary ---")
 print(f"CI Tests: {discovery_results['ci_tests']}")
 print(f"Runtime (s): {discovery_results['runtime']:.2f}")
+print(f"Elbow-Selected Variables per Target: {elbow_counts}")
+print(f"Elbow-Selected Variables - Mean: {elbow_mean:.2f}")
+print(f"Elbow-Selected Variables - Median across targets: {elbow_median:.2f}")
+print(f"Elbow-Selected Variables - Max across targets: {elbow_max}")
 
 print("\n--- Accuracy Results (mean ± std across runs) ---")
 print(f"SVC Mean Accuracy: {100 * np.mean(run_svc_means):.2f}% ± {100 * np.std(run_svc_means):.2f}%")

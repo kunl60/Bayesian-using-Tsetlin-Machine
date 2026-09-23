@@ -12,7 +12,7 @@ from evaluation.metrics import (
 
 
 def main():
-    run_seeds = [1, 2, 3]
+    run_seeds = [1, 2, 3, 4, 5]
 
     shd_list, precision_list, recall_list, f1_list = [], [], [], []
     ci_tests_list, ci_per_edge_list, runtime_list, nodes_diff_list = [], [], [], []

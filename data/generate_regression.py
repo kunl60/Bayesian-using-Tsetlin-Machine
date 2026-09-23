@@ -129,24 +129,6 @@ def load_superconductivity_dataset(sample_size=3000, n_bins=5, seed=42):
     return _prepare(df, sample_size, n_bins, seed)
 
 
-def load_year_prediction_msd_dataset(sample_size=3000, n_bins=5, seed=42):
-    """
-    YearPredictionMSD - a subset of the Million Song Dataset (OpenML
-    "Year_Prediction_MSD", data_id=46672): 90 continuous audio-timbre
-    features (12 timbre averages + 78 timbre covariances) + continuous
-    target (year the track was released), 515,345 rows. By far the largest
-    dataset here, so it's row-subsampled by default like superconductivity
-    - pass sample_size=None for the full dataset (fetch_openml's first
-    download is then correspondingly large, ~500MB).
-
-    Returns
-    -------
-    Same shape as load_california_housing_dataset: (raw_samples, categorical_samples).
-    """
-    df = _load_openml_frame(46672, "year_prediction_msd.csv")
-    return _prepare(df, sample_size, n_bins, seed)
-
-
 def load_musk_dataset(sample_size=3000, n_bins=5, seed=42):
     """
     Musk (Version 2) - molecule conformation data (OpenML data_id=46615):

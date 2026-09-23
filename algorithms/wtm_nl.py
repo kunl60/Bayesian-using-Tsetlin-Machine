@@ -55,7 +55,7 @@ class TsetlinMB:
         result = []
 
         for output, input_data in output_data.items():
-            sorted_inputs = sorted(input_data.items(), key=lambda x: x[1]["frequency"] * x[1]["total_weightage"], reverse=True)
+            sorted_inputs = sorted(input_data.items(), key=lambda x: x[1]["frequency"], reverse=True)
             
             top_inputs = sorted_inputs[:top_n]
 

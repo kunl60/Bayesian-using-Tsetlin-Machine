@@ -16,7 +16,7 @@ def main():
     # Same TM settings validated for ECOLI70/California - T sets the
     # regressor's output resolution (see run_wtm_nl_california.py).
     algo = TsetlinMBContinuousRegressor(
-        num_epochs=5, number_clauses=100, top_n=5, T=100, s=1
+        num_epochs=5, number_clauses=50, top_n=5, T=50, s=1
     )
     discovery_results = algo.run(categorical_samples, raw_samples)
 

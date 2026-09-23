@@ -12,7 +12,7 @@ from evaluation.metrics import (
 
 
 def main():
-    run_seeds = [1, 2, 3, 4, 5]
+    run_seeds = [1, 2, 3]
 
     shd_list, precision_list, recall_list, f1_list = [], [], [], []
     ci_tests_list, ci_per_edge_list, runtime_list, nodes_diff_list = [], [], [], []
@@ -26,7 +26,7 @@ def main():
         # variable count (26 = 27 nodes - target) forces ALL TM-proposed
         # candidates through, bypassing the elbow cut. maxK=3 caps the
         # conditioning-set search size in compute_target_PC.
-        tm_mb_elbow = TsetlinMB_elbow(num_epochs=5, number_clauses=10, top_n=26, maxK=3, T=10, s=5)
+        tm_mb_elbow = TsetlinMB_elbow(num_epochs=5, number_clauses=10, top_n=5, maxK=3, T=10, s=5)
         results = tm_mb_elbow.run(data, samples)
 
         shd, fp, fn = structural_hamming_distance(ground_truth, results["model"])

@@ -94,7 +94,7 @@ File names follow `run_<method>[_<dataset>].py`, where `<method>` is one of `wtm
 | Discrete, known graph | pgmpy example network, sampled with `BayesianModelSampling` | [data/generate_sachs.py](data/generate_sachs.py) |
 | Continuous, known graph | ECOLI70 (linear-Gaussian) | [data/generate_ecoli.py](data/generate_ecoli.py) |
 | Real categorical | SPECT, Neticusdroid, Mushroom, TUANDROMD | [data/generate_real_categorical.py](data/generate_real_categorical.py) |
-| Real continuous | California Housing, Superconductivity, Musk, ECG5000, Gas Turbine Emission, plus Parkinsons Telemonitoring and Year Prediction MSD (downloaded from OpenML on first use) | [data/generate_regression.py](data/generate_regression.py) |
+| Real continuous | California Housing, Superconductivity, Musk, ECG5000, Gas Turbine Emission, plus Parkinsons Telemonitoring (downloaded from OpenML on first use) | [data/generate_regression.py](data/generate_regression.py) |
 
 Continuous data is binned or thermometer-encoded for the TM front end, while the CI tests use the raw values. Some datasets are cached under `data/` after the first download.
 

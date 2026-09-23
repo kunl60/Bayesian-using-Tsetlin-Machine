@@ -52,6 +52,19 @@ def print_discovery_summary(discovery_results, mb_results):
     print(f"CI Tests: {discovery_results.get('ci_tests')}")
     print(f"Runtime (s): {discovery_results['runtime']:.2f}")
 
+    # Elbow-selected variables per target (deduplicated variable names,
+    # counted before CI-test pruning) - mirrors
+    # experiments_real_categorical/run_wtm_bn_mushroom.py. Discovery runs
+    # once, so this is a single set of stats, not mean ± std across runs.
+    elbow_selected = discovery_results.get("elbow_selected")
+    if elbow_selected:
+        elbow_counts = {target: len(vars_) for target, vars_ in elbow_selected.items()}
+        elbow_values = list(elbow_counts.values())
+        print(f"Elbow-Selected Variables per Target: {elbow_counts}")
+        print(f"Elbow-Selected Variables - Mean: {np.mean(elbow_values):.2f}")
+        print(f"Elbow-Selected Variables - Median across targets: {np.median(elbow_values):.2f}")
+        print(f"Elbow-Selected Variables - Max across targets: {np.max(elbow_values)}")
+
     mb_sizes = [len(members) for members in mb_results.values()]
     num_nodes = len(mb_results)
     average_mb_size = np.mean(mb_sizes) if num_nodes > 0 else 0
